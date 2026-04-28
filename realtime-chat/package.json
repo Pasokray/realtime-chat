@@ -1,0 +1,20 @@
+{
+  "name": "realtime-chat",
+  "version": "1.0.0",
+  "description": "Real-time chat application built with Node.js, Express, and Socket.io",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": ["chat", "socket.io", "realtime", "node", "express"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

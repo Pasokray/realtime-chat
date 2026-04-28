@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatSphere — Real-time Chat</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='20' fill='%235B4CF5'/><path d='M10 14h20M10 20h14M10 26h17' stroke='white' stroke-width='2.5' stroke-linecap='round'/><circle cx='31' cy='26' r='5' fill='%2322D3A0'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════  JOIN SCREEN  ═══════════════════════ -->
+  <div id="join-screen">
+    <div class="join-card">
+      <div class="join-logo">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="20" fill="#5B4CF5"/>
+          <path d="M10 14h20M10 20h14M10 26h17" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="31" cy="26" r="5" fill="#22D3A0"/>
+        </svg>
+        <span>ChatSphere</span>
+      </div>
+      <h1>Join the conversation</h1>
+      <p>Pick a username and a room to get started.</p>
+
+      <div class="field">
+        <label for="username-input">Your username</label>
+        <input id="username-input" type="text" placeholder="e.g. cosmic_bear" maxlength="20" autocomplete="off" />
+      </div>
+
+      <div class="field">
+        <label>Pick a room</label>
+        <div class="room-grid" id="room-picker">
+          <button class="room-btn active" data-room="General">💬 General</button>
+          <button class="room-btn" data-room="Tech Talk">💻 Tech Talk</button>
+          <button class="room-btn" data-room="Random">🎲 Random</button>
+          <button class="room-btn" data-room="Gaming">🎮 Gaming</button>
+          <button class="room-btn" data-room="Music">🎵 Music</button>
+        </div>
+      </div>
+
+      <button id="join-btn">Enter Chat →</button>
+      <p id="join-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════  CHAT APP  ═══════════════════════ -->
+  <div id="app" class="hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="20" fill="#5B4CF5"/>
+            <path d="M10 14h20M10 20h14M10 26h17" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="31" cy="26" r="5" fill="#22D3A0"/>
+          </svg>
+          <span>ChatSphere</span>
+        </div>
+      </div>
+
+      <nav class="rooms-nav">
+        <p class="nav-label">Rooms</p>
+        <ul id="room-list"></ul>
+      </nav>
+
+      <div class="online-panel">
+        <p class="nav-label">Online in room</p>
+        <ul id="user-list"></ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div id="my-avatar" class="avatar-chip"></div>
+        <span id="my-username"></span>
+        <button id="leave-btn" title="Leave chat">✕</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT -->
+    <main class="chat-area">
+      <header class="chat-header">
+        <button class="mobile-menu-btn" id="menu-toggle">☰</button>
+        <div class="room-info">
+          <h2 id="current-room-name"></h2>
+          <span id="room-count"></span>
+        </div>
+        <div class="conn-badge" id="conn-badge">
+          <span class="dot"></span> Live
+        </div>
+      </header>
+
+      <div class="messages-wrap">
+        <ul id="messages"></ul>
+        <div id="typing-indicator" class="typing-indicator hidden">
+          <span class="typing-dots"><span></span><span></span><span></span></span>
+          <span id="typing-text"></span>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <input id="msg-input" type="text" placeholder="Type a message…" maxlength="500" autocomplete="off" autofocus />
+        <button id="send-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
